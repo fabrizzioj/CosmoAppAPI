@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace CosmoAppAPI;
+namespace CosmoAppAPI.Models;
 
 public class AstronomyPicture
 {
