@@ -1,0 +1,4 @@
+@CosmoAppAPI_HostAddress = http://localhost:5116
+
+GET {{CosmoAppAPI_HostAddress}}/weatherforecast/
+Accept: application/json
