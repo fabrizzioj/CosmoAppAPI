@@ -16,7 +16,7 @@ public class AstronomyPictureController : ControllerBase
         _pictureService = pictureService;
     }
     
-    [HttpGet("today", Name = "GetTodayPicture")]
+    [HttpGet("today")]
     public async Task<ActionResult<AstronomyPicture>> Get()
     {
         try
@@ -33,7 +33,7 @@ public class AstronomyPictureController : ControllerBase
         }
     }
     
-    [HttpGet("photos/{date}", Name = "GetPictureByDate")]
+    [HttpGet("photos/{date}")]
     public async Task<ActionResult<AstronomyPictureDto>> Get(DateTime date)
     {
         try
