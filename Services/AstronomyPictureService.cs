@@ -1,24 +1,26 @@
-﻿namespace CosmoAppAPI.Services;
+﻿using CosmoAppAPI.Models;
+namespace CosmoAppAPI.Services;
 
 public class AstronomyPictureService
 {
     private readonly HttpClient _httpClient;
-    private readonly IConfiguration _configuration;
+    private readonly string _apiKey;
     
     public AstronomyPictureService(HttpClient httpClient,  IConfiguration configuration)
     {
         _httpClient = httpClient;
-        _configuration = configuration;
+        _apiKey = configuration["NasaApi:ApiKey"];
     }
 
-    public async Task<AstronomyPicture> GetTodayPictureAsync()
+    public async Task<AstronomyPicture?> GetTodayPictureAsync()
     {
-        var apiKey = _configuration["NasaApi:ApiKey"];
         var today = DateTime.Today.ToString("yyyy-MM-dd");
-        var baseUrl = $"https://api.nasa.gov/planetary/apod?api_key={apiKey}";
-        
-        var url = $"{baseUrl}&date={today}";
-        
+        return await GetPictureByDateAsync(today);
+    }
+    
+    public async Task<AstronomyPicture> GetPictureByDateAsync(string date)
+    {
+        var url = $"https://api.nasa.gov/planetary/apod?api_key={_apiKey}&date={date}";
         return await _httpClient.GetFromJsonAsync<AstronomyPicture>(url);
     }
 }
